@@ -19,3 +19,8 @@ This file is host code without GYM, used for general debug and initial connectio
 ## vadd.cpp 
 
 This is the kernel file, let me know if you need the config files that I used to build the .xclbin
+
+## .xclbin file
+
+Download the .xclbin file at:
+https://drive.google.com/file/d/1_BwbVeQ7PufF9G1qFsRE9EqBcbiqzkZt/view?usp=sharing
