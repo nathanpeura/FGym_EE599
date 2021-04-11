@@ -1,26 +1,16 @@
 # EE599_gym_vitis
 
-## gym_vitis_HW.py
+## gym_host_src
 
-This is the host code to run within the FPGA, to run:
+This folder contains the host files to use with python and the xclbin kernel. 
 
-First, add vitis paths: 
+## vitis_accel_src
 
-`source /opt/xilinx/xrt/setup.sh`
-
-Next, as long as the .xclbin file is in the directory run with: 
-
-`python gym_vitis_HW.py`
-
-## vitis_pyopencl.py
-
-This file is host code without GYM, used for general debug and initial connection. 
-
-## vadd.cpp 
-
-This is the kernel file, let me know if you need the config files that I used to build the .xclbin
+This folder contains the necessary files to create a xclbin kernel in vitis
 
 ## .xclbin file
 
 Download the .xclbin file at:
 https://drive.google.com/file/d/1_BwbVeQ7PufF9G1qFsRE9EqBcbiqzkZt/view?usp=sharing
+
+^^ This is a 16 input file, I can share larger ones if wanted. Currently testing how large of an input buffer I can create

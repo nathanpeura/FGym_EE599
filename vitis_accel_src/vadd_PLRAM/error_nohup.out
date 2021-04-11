@@ -1,0 +1,190 @@
+g++ -o plram_access /home/nathan/sandbox/source_files/Vitis_Accel_Examples/common/includes/xcl2/xcl2.cpp src/host.cpp -I/opt/xilinx/xrt/include -I/tools/Vivado/2020.1/include -Wall -O0 -g -std=c++11 -I/home/nathan/sandbox/source_files/Vitis_Accel_Examples/common/includes/xcl2 -fmessage-length=0 -L/opt/xilinx/xrt/lib -lOpenCL -lpthread  -lrt -lstdc++ 
+mkdir -p ./_x.hw.xilinx_u200_xdma_201830_2
+v++ -t hw --platform xilinx_u200_xdma_201830_2 --save-temps  -c -k vadd --temp_dir ./_x.hw.xilinx_u200_xdma_201830_2  -I'src' -o'_x.hw.xilinx_u200_xdma_201830_2/vadd.xo' 'src/vadd.cpp'
+Option Map File Used: '/tools/Vitis/2020.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ compile can be found at:
+	Reports: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/reports/vadd
+	Log files: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/logs/vadd
+INFO: [v++ 60-1657] Initializing dispatch client.
+Running Dispatch Server on port:40265
+INFO: [v++ 60-1548] Creating build summary session with primary output /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/vadd.xo.compile_summary, at Mon Apr  5 17:07:21 2021
+INFO: [v++ 60-1316] Initiating connection to rulecheck server, at Mon Apr  5 17:07:21 2021
+Running Rule Check Server on port:45667
+INFO: [v++ 60-1315] Creating rulecheck session with output '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/reports/vadd/v++_compile_vadd_guidance.html', at Mon Apr  5 17:07:22 2021
+INFO: [v++ 60-895]   Target platform: /opt/xilinx/platforms/xilinx_u200_xdma_201830_2/xilinx_u200_xdma_201830_2.xpfm
+INFO: [v++ 60-1578]   This platform contains Device Support Archive '/opt/xilinx/platforms/xilinx_u200_xdma_201830_2/hw/xilinx_u200_xdma_201830_2.dsa'
+INFO: [v++ 60-1302] Platform 'xilinx_u200_xdma_201830_2.xpfm' has been explicitly enabled for this release.
+INFO: [v++ 60-585] Compiling for hardware target
+INFO: [v++ 60-423]   Target device: xilinx_u200_xdma_201830_2
+INFO: [v++ 60-242] Creating kernel: 'vadd'
+
+===>The following messages were generated while  performing high-level synthesis for kernel: vadd Log file: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/vadd/vadd/vitis_hls.log :
+INFO: [v++ 204-61] Pipelining loop 'read1'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [v++ 204-61] Pipelining loop 'read2'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [v++ 204-61] Pipelining loop 'vadd'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 11.
+INFO: [v++ 204-61] Pipelining loop 'write'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [v++ 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [v++ 200-789] **** Estimated Fmax: 411.02 MHz
+INFO: [v++ 60-594] Finished kernel compilation
+INFO: [v++ 60-244] Generating system estimate report...
+INFO: [v++ 60-1092] Generated system estimate report: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/reports/vadd/system_estimate_vadd.xtxt
+INFO: [v++ 60-586] Created _x.hw.xilinx_u200_xdma_201830_2/vadd.xo
+INFO: [v++ 60-2343] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run the following command. 
+    vitis_analyzer /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/vadd.xo.compile_summary 
+INFO: [v++ 60-791] Total elapsed time: 0h 1m 0s
+INFO: [v++ 60-1653] Closing dispatch client.
+mkdir -p ./build_dir.hw.xilinx_u200_xdma_201830_2
+v++ -t hw --platform xilinx_u200_xdma_201830_2 --save-temps  -l  --temp_dir ./build_dir.hw.xilinx_u200_xdma_201830_2  --config vadd.cfg  -o'./build_dir.hw.xilinx_u200_xdma_201830_2/vadd.link.xclbin' _x.hw.xilinx_u200_xdma_201830_2/vadd.xo
+Option Map File Used: '/tools/Vitis/2020.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ link can be found at:
+	Reports: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/reports/link
+	Log files: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/logs/link
+INFO: [v++ 60-1657] Initializing dispatch client.
+Running Dispatch Server on port:44313
+INFO: [v++ 60-1548] Creating build summary session with primary output /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/vadd.link.xclbin.link_summary, at Mon Apr  5 17:08:24 2021
+INFO: [v++ 60-1316] Initiating connection to rulecheck server, at Mon Apr  5 17:08:24 2021
+Running Rule Check Server on port:38491
+INFO: [v++ 60-1315] Creating rulecheck session with output '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/reports/link/v++_link_vadd.link_guidance.html', at Mon Apr  5 17:08:26 2021
+INFO: [v++ 60-895]   Target platform: /opt/xilinx/platforms/xilinx_u200_xdma_201830_2/xilinx_u200_xdma_201830_2.xpfm
+INFO: [v++ 60-1578]   This platform contains Device Support Archive '/opt/xilinx/platforms/xilinx_u200_xdma_201830_2/hw/xilinx_u200_xdma_201830_2.dsa'
+INFO: [v++ 60-1302] Platform 'xilinx_u200_xdma_201830_2.xpfm' has been explicitly enabled for this release.
+INFO: [v++ 60-629] Linking for hardware target
+INFO: [v++ 60-423]   Target device: xilinx_u200_xdma_201830_2
+INFO: [v++ 60-1332] Run 'run_link' status: Not started
+INFO: [v++ 60-1443] [17:08:36] Run run_link: Step system_link: Started
+INFO: [v++ 60-1453] Command Line: system_link --xo /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/vadd.xo -keep --config /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/syslinkConfig.ini --xpfm /opt/xilinx/platforms/xilinx_u200_xdma_201830_2/xilinx_u200_xdma_201830_2.xpfm --target hw --output_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int --temp_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link
+INFO: [v++ 60-1454] Run Directory: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/run_link
+INFO: [SYSTEM_LINK 60-1316] Initiating connection to rulecheck server, at Mon Apr  5 17:08:39 2021
+INFO: [SYSTEM_LINK 82-70] Extracting xo v3 file /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/_x.hw.xilinx_u200_xdma_201830_2/vadd.xo
+INFO: [SYSTEM_LINK 82-53] Creating IP database /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.cdb/xd_ip_db.xml
+INFO: [SYSTEM_LINK 82-38] [17:08:39] build_xd_ip_db started: /tools/Vitis/2020.1/bin/build_xd_ip_db -ip_search 0  -sds-pf /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/xilinx_u200_xdma_201830_2.hpfm -clkid 0 -ip /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/iprepo/xilinx_com_hls_vadd_1_0,vadd -o /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.cdb/xd_ip_db.xml
+INFO: [SYSTEM_LINK 82-37] [17:08:45] build_xd_ip_db finished successfully
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.406 ; gain = 0.000 ; free physical = 13022 ; free virtual = 32467
+INFO: [SYSTEM_LINK 82-51] Create system connectivity graph
+INFO: [SYSTEM_LINK 82-102] Applying explicit connections to the system connectivity graph: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/cfgraph/cfgen_cfgraph.xml
+INFO: [SYSTEM_LINK 82-38] [17:08:45] cfgen started: /tools/Vitis/2020.1/bin/cfgen  -sp vadd_1.in1:PLRAM[0] -sp vadd_1.in2:DDR[0] -sp vadd_1.out:PLRAM[1] -dmclkid 0 -r /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.cdb/xd_ip_db.xml -o /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/cfgraph/cfgen_cfgraph.xml
+INFO: [CFGEN 83-0] Kernel Specs: 
+INFO: [CFGEN 83-0]   kernel: vadd, num: 1  {vadd_1}
+INFO: [CFGEN 83-0] Port Specs: 
+INFO: [CFGEN 83-0]   kernel: vadd_1, k_port: in1, sptag: PLRAM[0]
+INFO: [CFGEN 83-0]   kernel: vadd_1, k_port: in2, sptag: DDR[0]
+INFO: [CFGEN 83-0]   kernel: vadd_1, k_port: out, sptag: PLRAM[1]
+INFO: [CFGEN 83-2228] Creating mapping for argument vadd_1.in1 to PLRAM[0] for directive vadd_1.in1:PLRAM[0]
+INFO: [CFGEN 83-2228] Creating mapping for argument vadd_1.in2 to DDR[0] for directive vadd_1.in2:DDR[0]
+INFO: [CFGEN 83-2228] Creating mapping for argument vadd_1.out to PLRAM[1] for directive vadd_1.out:PLRAM[1]
+INFO: [SYSTEM_LINK 82-37] [17:08:48] cfgen finished successfully
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1432.406 ; gain = 0.000 ; free physical = 13020 ; free virtual = 32466
+INFO: [SYSTEM_LINK 82-52] Create top-level block diagram
+INFO: [SYSTEM_LINK 82-38] [17:08:48] cf2bd started: /tools/Vitis/2020.1/bin/cf2bd  --linux --trace_buffer 1024 --input_file /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/cfgraph/cfgen_cfgraph.xml --ip_db /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.cdb/xd_ip_db.xml --cf_name dr --working_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.xsd --temp_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link --output_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int --target_bd pfm_dynamic.bd
+INFO: [CF2BD 82-31] Launching cf2xd: cf2xd -linux -trace-buffer 1024 -i /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/cfgraph/cfgen_cfgraph.xml -r /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.cdb/xd_ip_db.xml -o dr.xml
+INFO: [CF2BD 82-28] cf2xd finished successfully
+INFO: [CF2BD 82-31] Launching cf_xsd: cf_xsd -disable-address-gen -bd pfm_dynamic.bd -dn dr -dp /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/sys_link/_sysl/.xsd
+INFO: [CF2BD 82-28] cf_xsd finished successfully
+INFO: [SYSTEM_LINK 82-37] [17:08:51] cf2bd finished successfully
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1432.406 ; gain = 0.000 ; free physical = 13011 ; free virtual = 32464
+INFO: [v++ 60-1441] [17:08:51] Run run_link: Step system_link: Completed
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:15 . Memory (MB): peak = 1339.469 ; gain = 0.000 ; free physical = 13036 ; free virtual = 32489
+INFO: [v++ 60-1443] [17:08:51] Run run_link: Step cf2sw: Started
+INFO: [v++ 60-1453] Command Line: cf2sw -sdsl /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/sdsl.dat -rtd /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/cf2sw.rtd -xclbin /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/xclbin_orig.xml -o /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/xclbin_orig.1.xml
+INFO: [v++ 60-1454] Run Directory: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/run_link
+INFO: [v++ 60-1441] [17:08:53] Run run_link: Step cf2sw: Completed
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1339.469 ; gain = 0.000 ; free physical = 13037 ; free virtual = 32491
+INFO: [v++ 60-1443] [17:08:53] Run run_link: Step rtd2_system_diagram: Started
+INFO: [v++ 60-1453] Command Line: rtd2SystemDiagram
+INFO: [v++ 60-1454] Run Directory: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/run_link
+INFO: [v++ 60-1441] [17:08:54] Run run_link: Step rtd2_system_diagram: Completed
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:01 . Memory (MB): peak = 1339.469 ; gain = 0.000 ; free physical = 12635 ; free virtual = 32090
+INFO: [v++ 60-1443] [17:08:54] Run run_link: Step vpl: Started
+INFO: [v++ 60-1453] Command Line: vpl -t hw -f xilinx_u200_xdma_201830_2 --remote_ip_cache /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/.ipcache -s --output_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int --log_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/logs/link --report_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/reports/link --config /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/vplConfig.ini -k /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link --no-info --iprepo /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/xo/ip_repo/xilinx_com_hls_vadd_1_0 --messageDb /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/run_link/vpl.pb /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/dr.bd.tcl
+INFO: [v++ 60-1454] Run Directory: /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/run_link
+
+****** vpl v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+INFO: [VPL 60-839] Read in kernel information from file '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/int/kernel_info.dat'.
+INFO: [VPL 60-423]   Target device: xilinx_u200_xdma_201830_2
+INFO: [VPL 60-1032] Extracting hardware platform to /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/vivado/vpl/.local/hw_platform
+[17:09:26] Run vpl: Step create_project: Started
+Creating Vivado project.
+[17:09:29] Run vpl: Step create_project: Completed
+[17:09:29] Run vpl: Step create_bd: Started
+[17:10:32] Run vpl: Step create_bd: Completed
+[17:10:32] Run vpl: Step update_bd: Started
+[17:10:32] Run vpl: Step update_bd: Completed
+[17:10:32] Run vpl: Step generate_target: Started
+[17:11:48] Run vpl: Step generate_target: RUNNING...
+[17:13:03] Run vpl: Step generate_target: Completed
+[17:13:03] Run vpl: Step config_hw_runs: Started
+[17:13:05] Run vpl: Step config_hw_runs: Completed
+[17:13:05] Run vpl: Step synth: Started
+[17:13:36] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:14:06] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:14:37] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:15:07] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:15:37] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:16:07] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:16:37] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:17:08] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:17:38] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:18:08] Block-level synthesis in progress, 0 of 1 jobs complete, 1 job running.
+[17:18:38] Block-level synthesis in progress, 1 of 1 jobs complete, 0 jobs running.
+[17:19:08] Top-level synthesis in progress.
+[17:19:38] Top-level synthesis in progress.
+[17:20:09] Top-level synthesis in progress.
+[17:20:39] Top-level synthesis in progress.
+[17:21:10] Run vpl: Step synth: Completed
+[17:21:10] Run vpl: Step impl: Started
+[17:33:45] Finished 2nd of 6 tasks (FPGA linking synthesized kernels to platform). Elapsed time: 00h 24m 48s 
+
+[17:33:45] Starting logic optimization..
+[17:35:15] Phase 1 Generate And Synthesize MIG Cores
+[17:39:48] Phase 2 Generate And Synthesize Debug Cores
+[17:42:49] Phase 3 Retarget
+[17:43:19] Phase 4 Constant propagation
+[17:43:19] Phase 5 Sweep
+[17:44:50] Phase 6 BUFG optimization
+[17:45:20] Phase 7 Shift Register Optimization
+[17:45:20] Phase 8 Post Processing Netlist
+[17:46:51] Finished 3rd of 6 tasks (FPGA logic optimization). Elapsed time: 00h 13m 06s 
+
+[17:46:51] Starting logic placement..
+[17:47:53] Run vpl: Step impl: Failed
+[17:47:53] Run vpl: FINISHED. Run Status: impl ERROR
+
+===>The following messages were generated while processing /home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/vivado/vpl/prj/prj.runs/impl_1 :
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB18 and RAMB36/FIFO over-utilized in Pblock pblock_dynamic_region (This design requires more RAMB18 and RAMB36/FIFO cells than are available in Pblock 'pblock_dynamic_region'. This design requires 6195 of such cell types but only 3696 compatible sites are available in Pblock 'pblock_dynamic_region'. Please consider increasing the span of Pblock 'pblock_dynamic_region' or removing cells from it.)
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB18 and RAMB36/FIFO over-utilized in Top Level Design (This design requires more RAMB18 and RAMB36/FIFO cells than are available in the target device. This design requires 6963 of such cell types but only 4320 compatible sites are available in the target device. Please analyze your synthesis results and constraints to ensure the design is mapped to Xilinx primitives as expected. If so, please consider targeting a larger device.)
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB36/FIFO over-utilized in Pblock pblock_dynamic_region (This design requires more RAMB36/FIFO cells than are available in Pblock 'pblock_dynamic_region'. This design requires 3097 of such cell types but only 1848 compatible sites are available in Pblock 'pblock_dynamic_region'. Please consider increasing the span of Pblock 'pblock_dynamic_region' or removing cells from it.)
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB36/FIFO over-utilized in Top Level Design (This design requires more RAMB36/FIFO cells than are available in the target device. This design requires 3472 of such cell types but only 2160 compatible sites are available in the target device. Please analyze your synthesis results and constraints to ensure the design is mapped to Xilinx primitives as expected. If so, please consider targeting a larger device.)
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB36E2 over-utilized in Pblock pblock_dynamic_region (This design requires more RAMB36E2 cells than are available in Pblock 'pblock_dynamic_region'. This design requires 3097 of such cell types but only 1848 compatible sites are available in Pblock 'pblock_dynamic_region'. Please consider increasing the span of Pblock 'pblock_dynamic_region' or removing cells from it.)
+ERROR: [VPL UTLZ-1] Resource utilization: RAMB36E2 over-utilized in Top Level Design (This design requires more RAMB36E2 cells than are available in the target device. This design requires 3472 of such cell types but only 2160 compatible sites are available in the target device. Please analyze your synthesis results and constraints to ensure the design is mapped to Xilinx primitives as expected. If so, please consider targeting a larger device.)
+ERROR: [VPL 4-23] Error(s) found during DRC. Placer not run.
+ERROR: [VPL 60-773] In '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/vivado/vpl/vivado.log', caught Tcl error:  problem implementing dynamic region, impl_1: place_design ERROR, please look at the run log file '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/vivado/vpl/prj/prj.runs/impl_1/runme.log' for more information
+WARNING: [VPL 60-732] Link warning: No monitor points found for BD automation.
+WARNING: [VPL 60-732] Link warning: The available BRAMs may not be sufficient to accommodate the kernels
+ERROR: [VPL 60-704] Integration error, problem implementing dynamic region, impl_1: place_design ERROR, please look at the run log file '/home/nathan/sandbox/source_files/Vitis_Accel_Examples/vadd_PLRAM/build_dir.hw.xilinx_u200_xdma_201830_2/link/vivado/vpl/prj/prj.runs/impl_1/runme.log' for more information
+ERROR: [VPL 60-1328] Vpl run 'vpl' failed
+ERROR: [VPL 60-806] Failed to finish platform linker
+INFO: [v++ 60-1442] [17:47:54] Run run_link: Step vpl: Failed
+Time (s): cpu = 00:00:32 ; elapsed = 00:39:00 . Memory (MB): peak = 1339.469 ; gain = 0.000 ; free physical = 2457 ; free virtual = 22169
+ERROR: [v++ 60-661] v++ link run 'run_link' failed
+ERROR: [v++ 60-626] Kernel link failed to complete
+ERROR: [v++ 60-703] Failed to finish linking
+INFO: [v++ 60-1653] Closing dispatch client.
+Makefile:164: recipe for target 'build_dir.hw.xilinx_u200_xdma_201830_2/vadd.xclbin' failed
+make: *** [build_dir.hw.xilinx_u200_xdma_201830_2/vadd.xclbin] Error 1
