@@ -5,8 +5,13 @@ This is adapted from the vitis accel git repo.
 
 To create a kernel, run:
 
-make all DEVICE=xilinx_u200_xdma_201830_2
+```make all DEVICE=xilinx_u200_xdma_201830_2```
 
+Make sure to run:
+
+```make cleanall```
+
+Before generating the kernel because sometimes residual files cause errors about resources
 
 
 
