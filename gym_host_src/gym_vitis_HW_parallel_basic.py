@@ -48,13 +48,14 @@ test_pf = True
 np.set_printoptions(precision=10)
 # doneVec = [False] * parallel_env_agent
 doneVec = np.full((parallel_env_agent), False)
-print(doneVec)
 
 for _ in range(50): #how many iterations to complete, will likely finish when 'done' is true from env.step
     #####################################
     # create observation and reward from Gym
     action = [env.action_space.sample(),env.action_space.sample(),env.action_space.sample(),env.action_space.sample()]
     observation, reward, done, info = env.step(action)
+
+    # print("Reward: ", reward) #think about moving this to input B
     
     count = count + 1
 
