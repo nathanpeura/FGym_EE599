@@ -1,16 +1,22 @@
 
+from validate.check_vadd import check_vadd_vector
 import time
+import csv
 import os
 import numpy as np
 import pyopencl as cl
+import gym
 os.environ["PYOPENCL_CTX"] = '1'
 
-import gym
 env = gym.make('CartPole-v0')
 observation = env.reset()
 
+# kernel_name = "vadd"
+
+
+    
 #############################################
-size_array = 16
+size_array = 16384
 iterations = 100
 
 #############################################
@@ -21,7 +27,7 @@ queue = cl.CommandQueue(ctx)
 mf = cl.mem_flags
 
 dev =cl.get_platforms()[1].get_devices()
-binary = open("xclbin_folder/vadd_16_8.xclbin", "rb").read()
+binary = open("xclbin_folder/vadd_16384_4096.xclbin", "rb").read()
 
 prg = cl.Program(ctx,dev,[binary])
 prg.build()
@@ -68,7 +74,7 @@ for _ in range(iterations): #how many iterations to complete, will likely finish
 
     vitis_time = time.time()
 
-    action = int(res_np[0]) #assign action to the first value of the result vector
+    action = int(res_np[0])%2 #assign action to the first value of the result vector, but make sure it fits in the possible actions (0 or 1)
 
     #####################################
 
@@ -81,22 +87,22 @@ for _ in range(iterations): #how many iterations to complete, will likely finish
     print("Total time: ", gym_time + vitis_time)
     print("-------")
 
-    bool_vec = res_np == (observation+a_np)
+    bool_vec = check_vadd_vector(observation, a_np, res_np)
 
     if(not bool_vec.any()):
         test_pf = False
-        print("A: ", observation)
-        print("B: ", a_np)
-        print("Res:      ", res_np)
-        print("Expected: ", observation+a_np)
         break
 
-    if done:
-       print("Episode finished after {} timesteps".format(count+1))
-       break
+    # if done:
+    #    print("Episode finished after {} timesteps".format(count+1))
+    #    break
     
     count += 1
 
+# time.sleep(10)
+# print(get_vitis_summary())
+
+# print("Avg Kernel t: ", get_vitis_summary())
 print("Avg Exe time: ", avg_exe_time/iterations)
 print("Overall time: ", time.time() - begin_time)
 
