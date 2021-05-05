@@ -13,13 +13,13 @@ type_observation = ""
 
 ################## User input ###########################
 episode_num = 1
-iteration_max = 5
-parallel_env = 1
-environment = 'CartPole-v1'
-xclbin_kernel = "xclbin_folder/analysis_files/cartpole_double/vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
-# environment = 'Pong-v4'
-# xclbin_kernel = "xclbin_folder/analysis_files/pongV2/vadd_DDR_pong_"+str(parallel_env)+".xclbin"
-generate_report = True
+iteration_max = 10000
+parallel_env = 4
+# environment = 'CartPole-v1'
+# xclbin_kernel = "xclbin_folder/analysis_files/cartpole_float/vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
+environment = 'Pong-v4'
+xclbin_kernel = "xclbin_folder/analysis_files/pong_float_reward/vadd_DDR_pong_"+str(parallel_env)+".xclbin"
+generate_report = False
 #########################################################
 
 # .astype(a)
@@ -101,7 +101,7 @@ if(generate_report):
 
 ###### create output buffer, change this if your output is different than the type of observation 
     # output = np.full((parallel_env), np.uint8(1))
-output = np.full((parallel_env), 1).astype(np.float64) #observation_flat[0])
+output = np.full((parallel_env), 1).astype(observation_flat[0]) #(np.float32)
 
 throwaway_time1 = time.time()
 
@@ -136,12 +136,13 @@ for x in range(episode_num):
         observation[0] = np.random.randint(0,6) #first val is used as the action, just random number 0 to 5
         
         # print("iteration: ", count)
-        test_data.reward[0] = np.float64(np.random.randint(0,6))
-        test_data.reward = test_data.reward.astype(np.float64)
+        test_data.reward[0] = (np.random.randint(0,6))
+        test_data.reward = abs(test_data.reward.astype(np.float32)) #observation_flat[0])
 
-        print(count)
+        if(count % 500 == 0):
+            print(count)
 
-        print("Reward: ", test_data.reward)
+        # print("Reward: ", test_data.reward)
         #####################################
         #call kernel
 
@@ -175,7 +176,7 @@ for x in range(episode_num):
 
         vitis_time = kernel_time - openCL_time
 
-        print("Output: ", res_np)
+        # print("Output: ", res_np)
 
         # print(res_np)
         # action = res_np
@@ -196,7 +197,7 @@ for x in range(episode_num):
 total_time = total_gym_time + total_vitis_time + setup_time #- 3344.97/1000
 # total_vitis_time -= 3344.97/1000
 
-spreadsheet_mode = False
+spreadsheet_mode = True
 
 if(generate_report or spreadsheet_mode):
     if(spreadsheet_mode):

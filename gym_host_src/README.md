@@ -1,10 +1,10 @@
 
 Change the binary xclbin according to where it is stored on your machine!
 
-These two files use PyOpenCL to bind to the FPGA through vitis and send data to the kernel, and the kernel sends data back.
+These files use PyOpenCL to bind to the FPGA through vitis and send data to the kernel, and the kernel sends data back.
 
-gym_vitis_HW.py basically sends a single observation vector as input A and random data as input B, then the kernel returns A + B vector add
+use host_program.py to run the RL benchmarking
 
-gym_vitis_HW_batched.py sends input A as repeated observation vector to act as 'batched' data as if someone would like to send larger than a single observation vector, input B is observation[0] to act as data to add with A, the kernel returns A + B
+-- I will add more to this readme this week
 
-Currently working on a parallel environment and agent python script
+One issue I am running into is opening the run summary for the kernel to show the overhead calculations, it will not produce the summary until the program is over. So, for now I separated it into 2 files and the second file reads the summary to print the kernel avg exe time

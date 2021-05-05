@@ -1,5 +1,4 @@
 #include "headr.h"
-#include <stdint.h>
 
 /**
 * Copyright (C) 2020 Xilinx, Inc
@@ -42,9 +41,9 @@ const unsigned int c_size = BUFFER_SIZE;
 */
 
 extern "C" {
-void vadd(const uint8_t* in1, // Read-Only Vector 1
-          uint8_t* out,     // Output Result
-          double reward,
+void vadd(const double* in1, // Read-Only Vector 1
+          const double* in2, // Read-Only Vector 2
+          double* out,     // Output Result
           int size                 // Size in integer
           ) {
     // In Vitis flow, a kernel can be defined without interface pragma. For such
@@ -53,8 +52,9 @@ void vadd(const uint8_t* in1, // Read-Only Vector 1
     // pointers using single M_AXI interface.
     // All the scalar arguments (size) and return argument will be associated to
     // single s_axilite interface.
-    uint8_t v1_buffer[BUFFER_SIZE];   // Local memory to store vector1
-    // double vout_buffer[1]; // Local Memory to store result
+    double v1_buffer[BUFFER_SIZE];   // Local memory to store vector1
+    double v2_buffer[BUFFER_SIZE];   // Local memory to store vector2
+    double vout_buffer[BUFFER_SIZE]; // Local Memory to store result
 
     // Per iteration of this loop perform BUFFER_SIZE vector addition
     for (int i = 0; i < size; i += BUFFER_SIZE) {
@@ -80,31 +80,30 @@ void vadd(const uint8_t* in1, // Read-Only Vector 1
             v1_buffer[j] = in1[i + j];
         }
 
-    out[0] = in1[0];
-    // read2:
-    //     for (int j = 0; j < chunk_size; j++) {
-    //         #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
-    //         #pragma HLS PIPELINE II = 1
-    //         v2_buffer[j] = in2[i + j];
-    //     }
+    read2:
+        for (int j = 0; j < chunk_size; j++) {
+            #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+            #pragma HLS PIPELINE II = 1
+            v2_buffer[j] = in2[i + j];
+        }
 
     // PIPELINE pragma reduces the initiation interval for loop by allowing the
     // concurrent executions of operations
-    // vadd:
-    //     for (int j = 0; j < chunk_size; j++) {
-    //         #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
-    //         #pragma HLS PIPELINE II = 1
-    //         // perform vector addition
-    //         vout_buffer[j] = v1_buffer[j] + v2_buffer[j];
-    //     }
+    vadd:
+        for (int j = 0; j < chunk_size; j++) {
+            #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+            #pragma HLS PIPELINE II = 1
+            // perform vector addition
+            vout_buffer[j] = v1_buffer[j] + v2_buffer[j];
+        }
 
-    // // burst write the result
-    // write:
-    //     for (int j = 0; j < chunk_size; j++) {
-    //         #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
-    //         #pragma HLS PIPELINE II = 1
-    //         out[i + j] = vout_buffer[j];
-    //     }
+    // burst write the result
+    write:
+        for (int j = 0; j < chunk_size; j++) {
+            #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+            #pragma HLS PIPELINE II = 1
+            out[i + j] = vout_buffer[j];
+        }
     }
 }
 }

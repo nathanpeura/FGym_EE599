@@ -1,3 +1,3 @@
 all:
-	python gym_vitis_overhead_calc.py
+	python host_program.py
 	python gym_vitis_post_exe.py

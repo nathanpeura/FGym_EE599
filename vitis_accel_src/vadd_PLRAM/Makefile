@@ -229,3 +229,5 @@ cleanall: clean
 	-$(RMDIR) package.*
 	-$(RMDIR) _x* *xclbin.run_summary qemu-memory-_* emulation _vimage pl* start_simulation.sh *.xclbin
 
+
+# g++ -Wall -g -std=c++11 src/host.cpp -o app.exe -I${XILINX_XRT}/include/ -I/tools/Xilinx/Vivado/2020.2/include/ -L/tools/Xilinx/Vivado/2020.2/lib/ -L${XILINX_VIVADO}/lib/ -lOpenCL -lpthread -lrt -lstdc++
