@@ -28,8 +28,14 @@ CartPole-v1 environment
 
 ## Dependencies
 
-Essential Python packages:
+This project uses Python 3. 
 
-numpy, pyopencl, time, os, sys
 
-Vitis, XRT, and necessary FPGA device drivers are also needed
+Essential Python packages: numpy, pyopencl, time, os, sys. The last 3 are built in packages. 
+
+To install numpy and pyopencl: 
+```
+pip3 numpy pyopencl
+```
+
+Vitis, XRT, and necessary FPGA device drivers are also needed.

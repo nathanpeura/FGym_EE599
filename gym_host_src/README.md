@@ -10,7 +10,7 @@ post_exe_report.py is used to read the summary file that is produced by vitis to
 
 xrt.ini is in this folder because it produces the summary file from Vitis after the test.
 
-Note that there will be an input file and output files generated for the demo, this version of host code will be in 'demo_generate' folder
+Demo code for the conference can be seen in the demo_generate folder. 
 
 ### Running the program
 
