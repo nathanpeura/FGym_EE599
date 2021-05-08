@@ -12,7 +12,6 @@ def get_vitis_summary(spreadsheet_mode):
     data_kernel_mem_read = []
     data_kernel_mem_write = []
     f = open("profile_summary.csv", "r")
-    # for line in f:
     reader = csv.reader(f, delimiter=",", quotechar='"')
     data_read = [row for row in reader]
     for x in range(len(data_read)):
@@ -25,7 +24,9 @@ def get_vitis_summary(spreadsheet_mode):
         if "Data Transfer: Kernels to Global Memory" in data_read[x]: #this finds the "Kernel execution" row and the next row will be the data
             data_kernel_mem_read = data_read[x+2] 
             data_kernel_mem_write = data_read[x+3] 
-            
+
+    f.close()
+
     #kernel execution          
     kernel_total_time = np.float64(data_kernel_exe[2])
     avg_kernel = np.float64(data_kernel_exe[4]) #divide by 1000 because it's in ms
@@ -53,6 +54,12 @@ def get_vitis_summary(spreadsheet_mode):
     kernel_mem_util_write = np.float64(data_kernel_mem_write[7])
     kernel_mem_avg_latency_write = np.float64(data_kernel_mem_write[9])
 
+    with open('data_out.txt', 'r') as file:
+        data = file.read().split('\n')
+    host_time = np.float32(data[0])
+    total_time = np.float32(data[1])
+    overhead = host_time/total_time
+
     if(spreadsheet_mode):
         print(kernel_total_time)
         print(total_transfer_time)
@@ -60,17 +67,24 @@ def get_vitis_summary(spreadsheet_mode):
         print(f'{host_mem_util_write:.10f}')
         print(host_mem_transferrate_read)
         print(host_mem_transferrate_write)
-        f = open("xclbin_folder/analysis_files/data_out.txt", "a")
-        str_data = str(kernel_total_time) + "\n" + str(total_transfer_time) + "\n" + str(f'{host_mem_util_read:.10f}') + "\n" + str(f'{host_mem_util_write:.10f}') + "\n" + str(host_mem_transferrate_read) + "\n" + str(host_mem_transferrate_write) + "\n"
-        f.write(str_data)
-        f.close()
+        print(host_time)
+        print(total_time)
+        print(overhead*100)
     else:
+        print("Post Execution Report:")
+        print("----------------------------")
+        print("Vitis Statistics")
+        print("----------------------------")
         print("Kernel time: ", kernel_total_time, ' ms')
         print("Total transfer time: ", total_transfer_time, ' ms')
         print("Util read: ", host_mem_util_read, "%\nUtil write: ", host_mem_util_write, "%")
         print("transfer rate read: ", host_mem_transferrate_read, " MB/s\ntransfer rate write: ", host_mem_transferrate_write, ' MB/s')
-
+        print("----------------------------")
+        print("Program Time and Overhead")
+        print("----------------------------")
+        print("Host Overhead time: ", host_time, " s")
+        print("Total time: ", total_time, " s")
+        print("Overhead percentage: ", overhead*100, " %")
     return avg_kernel
 
-# print("Kernel avg time (s): ", get_vitis_summary())
-get_vitis_summary(True)
+get_vitis_summary(False)

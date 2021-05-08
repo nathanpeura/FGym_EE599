@@ -13,16 +13,16 @@ type_observation = ""
 
 ################## User input ###########################
 episode_num = 1
-iteration_max = 1000
-parallel_env = 1
-environment = 'CartPole-v1'
-xclbin_kernel = "vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
+iteration_max = 10000
+parallel_env = 4
+# environment = 'CartPole-v1'
 # xclbin_kernel = "xclbin_folder/analysis_files/cartpole_float/vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
-# environment = 'Pong-v4'
-# xclbin_kernel = "xclbin_folder/analysis_files/pong_float_reward/vadd_DDR_pong_"+str(parallel_env)+".xclbin"
-generate_report = True
+environment = 'Pong-v4'
+xclbin_kernel = "xclbin_folder/analysis_files/pong_float_reward/vadd_DDR_pong_"+str(parallel_env)+".xclbin"
+generate_report = False
 #########################################################
 
+# .astype(a)
 
 class RL_data:
     def __init__(self):
@@ -50,7 +50,7 @@ def setup_device():
     return [ctx,queue,mf,krnl_vadd]
 
 def generate_pre_exe_report(observation_flat,parallel_env,env):
-    print("\n########################")
+    print("########################")
     print("Pre-execution report\n")
     print("----------------------------")
     print("Number of parallel environments: ", parallel_env)
@@ -79,6 +79,7 @@ def generate_pre_exe_report(observation_flat,parallel_env,env):
     print("Action element type: ", type(action_output))
     print("----------------------------")
 
+    print("########################")
 
 
 
@@ -146,14 +147,14 @@ for x in range(episode_num):
         #####################################
         #call kernel
 
-        for i in range(parallel_env):
-            if done[i] or test_data.doneVec[i]:
-                if not test_data.doneVec[i]:
-                    print("Episode: ",x+1," Env ", i, " finished after {} timesteps".format(count))
-                test_data.doneVec[i] = True
+        # for i in range(parallel_env):
+        #     if done[i] or test_data.doneVec[i]:
+        #         if not test_data.doneVec[i]:
+        #             print("Episode: ",x+1," Env ", i, " finished after {} timesteps".format(count))
+        #         test_data.doneVec[i] = True
         
-        if(test_data.doneVec.all()):
-            break
+        # if(test_data.doneVec.all()):
+        #     break
 
 
         throwaway_time = time.time()
@@ -196,9 +197,9 @@ for x in range(episode_num):
 
 print("########## Test completed ##########")
 
-total_time = total_gym_time + total_vitis_time + setup_time + total_openCL_time
+total_time = total_gym_time + total_vitis_time + setup_time 
 
-spreadsheet_mode = False
+spreadsheet_mode = True
 
 if(generate_report or spreadsheet_mode):
     if(spreadsheet_mode):
@@ -207,15 +208,20 @@ if(generate_report or spreadsheet_mode):
         print(total_openCL_time)
         print(total_gym_time)
         print(total_vitis_time)
-    else:
-        # print("Post-execution report: ")
-        # print("total time: ", total_time)
-        # print("setup time: ", setup_time)
-        # print("Opencl time: ", total_openCL_time)
-        f = open("data_out.txt", "w")
-        str_data = str(total_time-total_gym_time-total_vitis_time) + "\n" + str(total_time) + "\n"
+        f = open("xclbin_folder/analysis_files/data_out.txt", "w")
+        str_data = environment + " test with " + str(parallel_env) + " envs\n" + str(total_time) + "\n" + str(total_gym_time) + "\n" + str(total_vitis_time) + "\n"
         f.write(str_data)
         f.close()
+    else:
+        print("########################")
+        print("Post-execution report: ")
+        print("total time: ", total_time)
+        print("setup time: ", setup_time)
+        print("Opencl time: ", total_openCL_time)
+        print("total gym time: ", total_gym_time)
+        # print("Percent gym time: ", total_gym_time/total_time)
+        print("total vitis time: ", total_vitis_time)
+        # print("Percent gym time: ", total_vitis_time/total_time)
 
 if(test_pf):
     print("Test passed!")

@@ -43,10 +43,11 @@ const unsigned int c_size = BUFFER_SIZE;
 
 extern "C" {
 void vadd(const uint8_t* in1, // Read-Only Vector 1
+	  float* reward,
           uint8_t* out,     // Output Result
-          double reward,
-          int size                 // Size in integer
-          ) {
+          int size,                 // Size in integer
+          int batch_size
+	  ) {
     // In Vitis flow, a kernel can be defined without interface pragma. For such
     // case, it follows default behavioral.
     // All pointer arguments (in1,in2,out) will be referred as Memory Mapped
@@ -54,7 +55,7 @@ void vadd(const uint8_t* in1, // Read-Only Vector 1
     // All the scalar arguments (size) and return argument will be associated to
     // single s_axilite interface.
     uint8_t v1_buffer[BUFFER_SIZE];   // Local memory to store vector1
-    // double vout_buffer[1]; // Local Memory to store result
+	//uint8_t vout_buffer[16]; // Local Memory to store result
 
     // Per iteration of this loop perform BUFFER_SIZE vector addition
     for (int i = 0; i < size; i += BUFFER_SIZE) {
@@ -80,7 +81,7 @@ void vadd(const uint8_t* in1, // Read-Only Vector 1
             v1_buffer[j] = in1[i + j];
         }
 
-    out[0] = in1[0];
+    //out[0] = in1[0];
     // read2:
     //     for (int j = 0; j < chunk_size; j++) {
     //         #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
@@ -99,12 +100,12 @@ void vadd(const uint8_t* in1, // Read-Only Vector 1
     //     }
 
     // // burst write the result
-    // write:
-    //     for (int j = 0; j < chunk_size; j++) {
-    //         #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
-    //         #pragma HLS PIPELINE II = 1
-    //         out[i + j] = vout_buffer[j];
-    //     }
+     write:
+         for (int j = 0; j < batch_size; j++) {
+             #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+             #pragma HLS PIPELINE II = 1
+             out[j] = uint8_t (reward[j]);
+         }
     }
 }
 }

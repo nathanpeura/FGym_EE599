@@ -1,16 +1,35 @@
-# EE599_gym_vitis
+# EE599 Final Project - FGym
 
-## gym_host_src
+Student: Nathan Peura
 
-This folder contains the host files to use with python and the xclbin kernel. 
+## FGym
 
-## vitis_accel_src
+This is the final project for EE599, this project provides an open source ready-to-use platform to test and compare FPGA RL algorithms. The toolkit is implemented to automatically generate the CPU-FPGA interface and provide a RL environment through the OpenAI Gym python library. 
 
-This folder contains the necessary files to create a xclbin kernel in vitis
+Each folder has its own README files that will explain how to run the code.
 
-## .xclbin file
+### gym_host_src
 
-Download the .xclbin file at:
-https://drive.google.com/file/d/1_BwbVeQ7PufF9G1qFsRE9EqBcbiqzkZt/view?usp=sharing
+This folder contains the host files to use to test the benchmark with XCLBIN files. A readme is inside to show how to run the program.
 
-^^ This is a 16 input file, I can share larger ones if wanted. Currently testing how large of an input buffer I can create
+### vitis_accel_src
+
+This folder contains the necessary folder to create a xclbin kernel in Vitis. A readme is inside to show how to make a kernel.
+
+### Bitstream file (.xclbin)
+
+An example XCLBIN file can be downloaded at:
+
+This example file uses:
+
+The current host program is configured to run this XCLBIN file. The params can be seen below.
+CartPole-v1 environment
+4 parallel environments
+
+## Dependencies
+
+Essential Python packages:
+
+numpy, pyopencl, time, os, sys
+
+Vitis, XRT, and necessary FPGA device drivers are also needed

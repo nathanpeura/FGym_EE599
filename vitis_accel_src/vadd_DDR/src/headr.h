@@ -1,0 +1,3 @@
+
+#define DATA_SIZE 25804800
+#define BUFFER_SIZE 6451200

@@ -53,7 +53,7 @@ help::
 ############################## Setting up Project Variables ##############################
 # Points to top directory of Git repository
 MK_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
-COMMON_REPO ?= $(shell bash -c 'export MK_PATH=$(MK_PATH); echo $${MK_PATH%vadd_PLRAM/*}')
+COMMON_REPO ?= $(shell bash -c 'export MK_PATH=$(MK_PATH); echo $${MK_PATH%vadd_DDR/*}')
 PWD = $(shell readlink -f .)
 XF_PROJ_ROOT = $(shell readlink -f $(COMMON_REPO))
 
@@ -229,5 +229,3 @@ cleanall: clean
 	-$(RMDIR) package.*
 	-$(RMDIR) _x* *xclbin.run_summary qemu-memory-_* emulation _vimage pl* start_simulation.sh *.xclbin
 
-
-# g++ -Wall -g -std=c++11 src/host.cpp -o app.exe -I${XILINX_XRT}/include/ -I/tools/Xilinx/Vivado/2020.2/include/ -L/tools/Xilinx/Vivado/2020.2/lib/ -L${XILINX_VIVADO}/lib/ -lOpenCL -lpthread -lrt -lstdc++
