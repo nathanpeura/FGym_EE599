@@ -6,20 +6,15 @@ import time
 os.environ["PYOPENCL_CTX"] = '1'
 from stable_baselines3.common.env_util import make_vec_env 
 
-
 import gym
 
-type_observation = ""
 
 ################## User input ###########################
-episode_num = 1
-iteration_max = 1000
-parallel_env = 1
+episode_num = 3
+iteration_max = 10000
+parallel_env = 4
 environment = 'CartPole-v1'
-xclbin_kernel = "vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
-# xclbin_kernel = "xclbin_folder/analysis_files/cartpole_float/vadd_DDR_cartpole_"+str(parallel_env)+".xclbin"
-# environment = 'Pong-v4'
-# xclbin_kernel = "xclbin_folder/analysis_files/pong_float_reward/vadd_DDR_pong_"+str(parallel_env)+".xclbin"
+xclbin_kernel = "vadd_DDR_cartpole_4.xclbin"
 generate_report = True
 #########################################################
 
@@ -118,7 +113,7 @@ total_openCL_time = 0
 test_data = RL_data()
 
 for x in range(episode_num):
-    print("########## Episode number: ", episode_num, " ##########")
+    print("########## Episode number: ", x, " ##########")
     test_data.observation = env.reset()
     test_data.doneVec = np.full((parallel_env), False)
     for count in range(iteration_max): #how many iterations to complete, will likely finish when 'done' is true from env.step
@@ -178,17 +173,13 @@ for x in range(episode_num):
 
         # print("Output: ", res_np)
 
-        # print(res_np)
-        # action = res_np
         gym_time -= start_time_gym
         total_gym_time += gym_time
         total_vitis_time += vitis_time
         total_openCL_time += openCL_time_2
         kernel_time = kernel_time - openCL_time
-
-        # if(res_np != test_data.reward):
             
-        for j in range(len(res_np)):
+        for j in range(len(res_np)): #created to compare the output with the expected output
             if(res_np[j] != test_data.reward[j]):
                 print("Not equal!")
                 test_pf = False
@@ -208,10 +199,6 @@ if(generate_report or spreadsheet_mode):
         print(total_gym_time)
         print(total_vitis_time)
     else:
-        # print("Post-execution report: ")
-        # print("total time: ", total_time)
-        # print("setup time: ", setup_time)
-        # print("Opencl time: ", total_openCL_time)
         f = open("data_out.txt", "w")
         str_data = str(total_time-total_gym_time-total_vitis_time) + "\n" + str(total_time) + "\n"
         f.write(str_data)

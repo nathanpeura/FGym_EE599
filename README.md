@@ -18,7 +18,7 @@ This folder contains the necessary folder to create a xclbin kernel in Vitis. A 
 
 ### Bitstream file (.xclbin)
 
-An example XCLBIN file can be downloaded at:
+An example XCLBIN file can be downloaded at: https://drive.google.com/file/d/1InDg85QK_Yb4-Slgy8VuII7O8VTwHMhL/view?usp=sharing
 
 This example file uses:
 
@@ -39,3 +39,20 @@ pip3 numpy pyopencl
 ```
 
 Vitis, XRT, and necessary FPGA device drivers are also needed.
+
+## Other Information
+
+Programming languages:
+
+- Host program: Python, PyOpenCL
+
+Software:
+
+- Xilinx XRT
+- Python
+
+Target Platform: 
+
+- FPGA, used Alveo U200 in this project
+
+

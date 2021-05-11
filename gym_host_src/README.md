@@ -1,7 +1,10 @@
 
 ## gym_host_src
 
-This folder contains a host program and a post_execution program. 
+This folder contains a host program and a post_execution program. Put the XCLBIN in this folder or change the path within the host program. 
+
+XCLBIN link to download: https://drive.google.com/file/d/1InDg85QK_Yb4-Slgy8VuII7O8VTwHMhL/view?usp=sharing
+
 
 ### Files
 The host_program.py is used to run the benchmark for the FPGA device. There are parameters within the file that the user can manually configure for their own test.
