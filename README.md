@@ -53,6 +53,6 @@ Software:
 
 Target Platform: 
 
-- FPGA, used Alveo U200 in this project
+- CPU - FPGA, used Linux + Alveo U200 FPGA in this project
 
 
