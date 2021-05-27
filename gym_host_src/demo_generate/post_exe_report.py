@@ -86,15 +86,16 @@ def get_vitis_summary(spreadsheet_mode):
         print("Total time: ", total_time, " s")
         print("Overhead percentage: ", overhead*100, " %")
 
-        print("Latency breakdown (Averaged over n iterations)")
-        print("+----------------+------+-------------+\n|   Task    	 |   %  | Raw Latency | \n+----------------+------+-------------+")
-        print("| env step       | 12.9 |  1158259 ms |")
-        print("| Host<->FPGA    | 32.4 |  1857594 ns |")
-        print("| Kernel<->Mem   | xxxx |   120900    |")
-        print("| Kernel-Compute | xxxx |   205556    |")
-        print("| Others *       | 1566 |  3806092    |")
-        print("| Total          | 5386 |  1554769    |")
-        print("+----------------+------+-------------+)")
+        #didn't get the time to format this way
+        # print("Latency breakdown (Averaged over n iterations)")
+        # print("+----------------+------+-------------+\n|   Task    	 |   %  | Raw Latency | \n+----------------+------+-------------+")
+        # print("| env step       | 12.9 |  1158259 ms |")
+        # print("| Host<->FPGA    | 32.4 |  1857594 ns |")
+        # print("| Kernel<->Mem   | xxxx |   120900    |")
+        # print("| Kernel-Compute | xxxx |   205556    |")
+        # print("| Others *       | 1566 |  3806092    |")
+        # print("| Total          | 5386 |  1554769    |")
+        # print("+----------------+------+-------------+)")
 
     return avg_kernel
 

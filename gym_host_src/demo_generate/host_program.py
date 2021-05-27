@@ -15,8 +15,8 @@ import gym
 # episode_num = 3
 # iteration_max = 10000
 # parallel_env = 4
-environment = 'CartPole-v1'
-xclbin_kernel = "vadd_DDR_cartpole_1.xclbin"
+environment = 'Pong-v4'
+xclbin_kernel = "vadd_DDR_pong_1.xclbin"
 generate_report = True
 #########################################################
 
